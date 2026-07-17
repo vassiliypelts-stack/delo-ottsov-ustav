@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дело Отцов — Сутевой устав</title>
+<style>
+  :root {
+    --bg: #eee8da;
+    --panel: #e2dac8;
+    --panel-ink: #241f17;
+    --ink: #241f17;
+    --ink-muted: #6b6152;
+    --accent: #8a5e1f;
+    --accent-ink: #fbf6ea;
+    --rule: #c7bc9f;
+    --seal: #7d5a26;
+    --focus: #2f6fb0;
+
+    --font-display: "Rockwell", "Roboto Slab", "Sitka Text", Georgia, "Iowan Old Style", serif;
+    --font-body: "Iowan Old Style", "Palatino Linotype", Palatino, "URW Palladio L", Georgia, serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1610;
+      --panel: #120f0a;
+      --panel-ink: #ece4d2;
+      --ink: #ece4d2;
+      --ink-muted: #a89a80;
+      --accent: #cf9f4f;
+      --accent-ink: #1a1610;
+      --rule: #3a3122;
+      --seal: #cf9f4f;
+      --focus: #7db3e8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a1610;
+    --panel: #120f0a;
+    --panel-ink: #ece4d2;
+    --ink: #ece4d2;
+    --ink-muted: #a89a80;
+    --accent: #cf9f4f;
+    --accent-ink: #1a1610;
+    --rule: #3a3122;
+    --seal: #cf9f4f;
+    --focus: #7db3e8;
+  }
+  :root[data-theme="light"] {
+    --bg: #eee8da;
+    --panel: #e2dac8;
+    --panel-ink: #241f17;
+    --ink: #241f17;
+    --ink-muted: #6b6152;
+    --accent: #8a5e1f;
+    --accent-ink: #fbf6ea;
+    --rule: #c7bc9f;
+    --seal: #7d5a26;
+    --focus: #2f6fb0;
+  }
+
+  * { box-sizing: border-box; }
+  html { direction: ltr; }
+  html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    direction: ltr;
+  }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-areas: "sidebar main";
+    grid-template-columns: 272px minmax(0, 1fr);
+    direction: ltr;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    grid-area: sidebar;
+    width: 272px;
+    min-width: 272px;
+    max-width: 272px;
+    background: var(--panel);
+    color: var(--panel-ink);
+    border-right: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 28px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .sidebar-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sidebar-mark svg { flex: none; }
+  .sidebar-mark .name {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.25;
+  }
+  .sidebar-mark .name em {
+    display: block;
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+    margin-top: 3px;
+  }
+
+  nav.toc { display: flex; flex-direction: column; gap: 2px; }
+  nav.toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 7px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--panel-ink);
+    font-size: 13.5px;
+    line-height: 1.35;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  nav.toc a .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    min-width: 20px;
+  }
+  nav.toc a:hover { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+  nav.toc a[aria-current="true"] {
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  nav.toc a[aria-current="true"] .num { color: var(--accent); }
+  nav.toc .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 10px 2px;
+  }
+
+  .sidebar-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+  .sidebar-foot .note {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-muted);
+    letter-spacing: 0.03em;
+  }
+  .theme-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--panel-ink);
+    border-radius: 4px;
+    padding: 6px 9px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+  }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .menu-btn {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    top: 14px;
+    left: 14px;
+    background: var(--panel);
+    color: var(--panel-ink);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  /* ---------- Main column ---------- */
+  main {
+    grid-area: main;
+    min-width: 0;
+    width: 100%;
+    padding: 72px clamp(24px, 6vw, 96px) 120px;
+    max-width: 760px;
+  }
+
+  .title-block {
+    margin-bottom: 56px;
+    position: relative;
+  }
+  .title-block .seal {
+    margin-bottom: 22px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+  h1.doc-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(34px, 5vw, 50px);
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+  .doc-subtitle {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-muted);
+    margin: 0 0 18px;
+  }
+  .doc-tagline {
+    font-size: 15px;
+    color: var(--ink-muted);
+    max-width: 46ch;
+    margin: 0;
+  }
+
+  .lede {
+    font-size: 18.5px;
+    line-height: 1.7;
+    color: var(--ink);
+    border-left: 3px solid var(--accent);
+    padding: 2px 0 2px 22px;
+    margin: 0 0 60px;
+  }
+
+  section.article {
+    margin-bottom: 54px;
+    scroll-margin-top: 28px;
+  }
+  section.article .article-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 10px;
+  }
+  section.article .roman {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  section.article h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 25px;
+    margin: 0;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
+
+  section.article p { margin: 0 0 16px; max-width: 66ch; }
+  section.article p:last-child { margin-bottom: 0; }
+
+  .values {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .values li {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 12px;
+    max-width: 66ch;
+  }
+  .values .n {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 14px;
+    padding-top: 3px;
+  }
+  .values strong { font-weight: 600; }
+
+  .note-block {
+    font-size: 14.5px;
+    color: var(--ink-muted);
+    font-style: italic;
+    border-top: 1px dashed var(--rule);
+    padding-top: 12px;
+    margin-top: 18px;
+    max-width: 60ch;
+  }
+
+  .closing {
+    margin-top: 80px;
+    padding-top: 34px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+  .closing p {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 16px;
+    max-width: 46ch;
+    margin: 0 auto 18px;
+  }
+  .closing .brand {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; grid-template-areas: "main"; }
+    .menu-btn { display: block; }
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: 280px;
+      min-width: 280px;
+      max-width: 280px;
+      transform: translateX(-100%);
+      transition: transform 200ms ease;
+      z-index: 15;
+      box-shadow: 2px 0 24px rgba(0,0,0,0.25);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .scrim {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 12;
+    }
+    .scrim.open { display: block; }
+    main { padding-top: 96px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; transition: none !important; }
+  }
+
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+<div class="layout">
+  <button class="menu-btn" id="menuBtn" aria-label="Открыть меню разделов" aria-expanded="false">☰</button>
+  <div class="scrim" id="scrim"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-mark">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <circle cx="17" cy="17" r="15.5" stroke="var(--seal)" stroke-width="1.2"/>
+        <circle cx="17" cy="17" r="10.5" stroke="var(--seal)" stroke-width="1"/>
+        <circle cx="17" cy="17" r="2.4" fill="var(--seal)"/>
+        <g stroke="var(--seal)" stroke-width="1">
+          <line x1="17" y1="1.5" x2="17" y2="6.5"/>
+          <line x1="17" y1="27.5" x2="17" y2="32.5"/>
+          <line x1="1.5" y1="17" x2="6.5" y2="17"/>
+          <line x1="27.5" y1="17" x2="32.5" y2="17"/>
+        </g>
+      </svg>
+      <div class="name">Дело Отцов<em>Сутевой устав</em></div>
+    </div>
+
+    <nav class="toc" aria-label="Разделы устава">
+      <a href="#preambula"><span class="num">—</span>Преамбула</a>
+      <div class="divider"></div>
+      <a href="#missiya"><span class="num">I</span>Миссия</a>
+      <a href="#tsennosti"><span class="num">II</span>Ценности</a>
+      <a href="#kto-vnutri"><span class="num">III</span>Кто внутри</a>
+      <a href="#obshenie"><span class="num">IV</span>Как мы общаемся</a>
+      <a href="#upravlenie"><span class="num">V</span>Управление</a>
+      <a href="#dengi"><span class="num">VI</span>Деньги и капитал</a>
+      <a href="#nasledie"><span class="num">VII</span>Наследие и дети</a>
+      <a href="#chto-daet"><span class="num">VIII</span>Что даёт участнику</a>
+      <a href="#objazatelstva"><span class="num">IX</span>Обязательства</a>
+      <a href="#vyhod"><span class="num">X</span>Выход и исключение</a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <span class="note">рабочая версия</span>
+      <button class="theme-btn" id="themeBtn" type="button">тема</button>
+    </div>
+  </aside>
+
+  <main id="main">
+    <div class="title-block">
+      <svg class="seal" width="46" height="46" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <circle cx="17" cy="17" r="15.5" stroke="var(--seal)" stroke-width="1.2"/>
+        <circle cx="17" cy="17" r="10.5" stroke="var(--seal)" stroke-width="1"/>
+        <circle cx="17" cy="17" r="2.4" fill="var(--seal)"/>
+        <g stroke="var(--seal)" stroke-width="1">
+          <line x1="17" y1="1.5" x2="17" y2="6.5"/>
+          <line x1="17" y1="27.5" x2="17" y2="32.5"/>
+          <line x1="1.5" y1="17" x2="6.5" y2="17"/>
+          <line x1="27.5" y1="17" x2="32.5" y2="17"/>
+        </g>
+      </svg>
+      <p class="eyebrow">Кооператив мужского служения, наследия и рода</p>
+      <h1 class="doc-title">Дело Отцов</h1>
+      <p class="doc-subtitle">Сутевой устав — рабочее название; символ рода — Сварга</p>
+      <p class="doc-tagline">Не документ для Минюста. Смысловой фундамент: ради чего мы собираемся, во что верим, как обращаемся друг с другом и как строим общее дело на десятилетия вперёд.</p>
+    </div>
+
+    <p class="lede" id="preambula">
+      Один человек не может нести наследие в одиночку. Капитал, дом, дело без продолжателей — распродаются, обесцениваются, растаскиваются. <strong>Дело Отцов</strong> — способ объединить мужчин, готовых служить общему делу, чтобы построенное не исчезло, а осталось после каждого из нас.
+    </p>
+
+    <section class="article" id="missiya">
+      <div class="article-head"><span class="roman">I</span><h2>Миссия</h2></div>
+      <p><strong>Дело Отцов существует для помощи разведённым мужчинам</strong> — тем, кто потерял опору, семью, направление — и хочет встать на ноги заново.</p>
+      <p>То, что должно остаться после каждого из нас — не деньги и не имущество, а <strong>зелёная мафия своих</strong>: люди со своей моделью поведения, своим культурным кодом, которые продолжают дело.</p>
+      <p>Это не благотворительность и не инвестклуб. Это <strong>служение</strong>.</p>
+    </section>
+
+    <section class="article" id="tsennosti">
+      <div class="article-head"><span class="roman">II</span><h2>Ценности</h2></div>
+      <ul class="values">
+        <li><span class="n">01</span><span><strong>Служение и самопожертвование.</strong> Никакой измены своим. Человек, который однажды предал единомышленников, в круг не возвращается.</span></li>
+        <li><span class="n">02</span><span><strong>Культ отцов.</strong> Не просто уважение — беспрекословное почитание. Обряды, память, благодарность отцам как основа рода.</span></li>
+        <li><span class="n">03</span><span><strong>Прекращение войны полов.</strong> Женщина — не конкурент и не противник, а помощница и союзница. Мы не побеждаем в этой войне — мы её заканчиваем: лишаем смысла, почвы и повода.</span></li>
+      </ul>
+    </section>
+
+    <section class="article" id="kto-vnutri">
+      <div class="article-head"><span class="roman">III</span><h2>Кто внутри</h2></div>
+      <p><strong>Ядро — разведённые мужчины.</strong> Люди, которые потеряли опору и готовы её обрести заново — вместе.</p>
+      <p>Это <strong>закрытый мужской клуб</strong>. У участников есть свои семьи — жёны, дети, — но решения принимают мужчины.</p>
+      <p>Не подходят: индивидуалисты, люди с «капиталистической прошивкой», предатели своих.</p>
+      <p><strong>Капитал не объединяем — капитал нам не нужен.</strong> Дело Отцов — опора для человека, а не инвестиционная схема.</p>
+      <p><strong>Два уровня причастности:</strong> вступил в кооператив — получаешь всё сполна; не вступил — получаешь только поддержку в трудную минуту.</p>
+    </section>
+
+    <section class="article" id="obshenie">
+      <div class="article-head"><span class="roman">IV</span><h2>Как мы общаемся</h2></div>
+      <p>Свобода в привычном смысле нам не нужна — она для тех, кто ничего не строит. Мы выбираем <strong>служение</strong> вместо «свободы, равенства, братства».</p>
+      <p>Споры решает старший — по иерархии, а не голосованием.</p>
+      <p><strong>Личное — табу.</strong> Интимные истории, трагедии, семейные дела каждого остаются внутри круга и никогда не выносятся наружу.</p>
+    </section>
+
+    <section class="article" id="upravlenie">
+      <div class="article-head"><span class="roman">V</span><h2>Управление</h2></div>
+      <p>На старте вся ответственность — на основателе. Но цель не удерживать власть, а <strong>вырастить вождя</strong> и с готовностью подстроиться под него.</p>
+      <p>Управление строится по принципу старшинства — <strong>«у нас правят деды»</strong>. Молодые участники со временем сами становятся старшими — через дело, через испытания, через доказанную состоятельность.</p>
+      <p class="note-block">Механика принятия крупных решений и состав первого круга старших — уточняется отдельно и будет закреплено дополнением к уставу.</p>
+    </section>
+
+    <section class="article" id="dengi">
+      <div class="article-head"><span class="roman">VI</span><h2>Деньги и капитал</h2></div>
+      <p>Модель — как фонд, живущий на проценты, а не проедающий тело капитала (принцип Нобелевского фонда).</p>
+      <p><strong>Тело капитала не трогаем.</strong> Живём с дохода.</p>
+      <p>Доход с недвижимости и с производства контейнеров — <strong>один котёл</strong>. Аренда выгоднее продажи: как квартира за 20 лет аренды приносит больше своей рыночной стоимости, так и контейнер в аренде ценнее контейнера проданного.</p>
+      <p><strong>Весь доход инвестируется в развитие вождей</strong> — в людей, а не в накопление. Главный капитал Дела Отцов — это сами мужчины. Деньгами как самоцелью не занимаемся — «деньгами занимаются только лохи».</p>
+      <p>Основатель лично принял решение: <strong>лишить наследства кровных наследников и завещать всё Делу Отцов</strong> — неделимому фонду.</p>
+    </section>
+
+    <section class="article" id="nasledie">
+      <div class="article-head"><span class="roman">VII</span><h2>Наследие и дети</h2></div>
+      <p>Кооператив берёт на себя заботу о тех, кто остался без опоры — присмотр за детьми участников, помощь в трудную минуту. Поддержка — <strong>пожизненная</strong>, не привязанная к конкретному возрасту получения прав.</p>
+      <p class="note-block">Точная механика опеки — кто персонально отвечает и что конкретно передаётся — уточняется отдельно.</p>
+    </section>
+
+    <section class="article" id="chto-daet">
+      <div class="article-head"><span class="roman">VIII</span><h2>Что Дело Отцов даёт участнику</h2></div>
+      <p>Мы создаём мужское сообщество, где <strong>вожди воспроизводят вождей</strong>.</p>
+      <p>Мужчины поддерживают друг друга — не обесценивают, поднимают, восхищаются успехами друг друга. Дело даёт ресурсы на испытания и рост — учит быть сильным.</p>
+      <p>Первый ощутимый результат для входящего — не через двадцать лет, а быстро: <strong>встать на ноги</strong>, и дальше кооператив опирается на эти ноги.</p>
+      <p>Логика проста: <strong>сильный участник — сильное Дело.</strong> Кооператив растёт ровно настолько, насколько растут его люди.</p>
+    </section>
+
+    <section class="article" id="objazatelstva">
+      <div class="article-head"><span class="roman">IX</span><h2>Обязательства участника</h2></div>
+      <p>Вход открыт тем, у кого есть <strong>руки, время, связи, деньги</strong> — любая реальная польза приветствуется.</p>
+      <p>Обязательное условие — <strong>личное участие в сборке домов</strong> (контейнерное производство). Это не абстрактный взнос, а труд своими руками.</p>
+      <p class="note-block">Что происходит, если участник не тянет свою часть — уточняется отдельно.</p>
+    </section>
+
+    <section class="article" id="vyhod">
+      <div class="article-head"><span class="roman">X</span><h2>Выход и исключение</h2></div>
+      <p><strong>При выходе:</strong> часть вклада уходит в неделимый фонд навсегда — она не возвращается. Отдельная часть вклада участник забирает с собой.</p>
+      <p><strong>Исключают за:</strong> нарушение устава, интриги и конфликты, обесценивание друг друга, конкуренцию внутри круга вместо взаимной поддержки, неповиновение.</p>
+    </section>
+
+    <div class="closing">
+      <p>Устав — не про регистрацию. Устав — про то, что остаётся, когда человека больше нет.</p>
+      <div class="brand">Дело Отцов</div>
+    </div>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var themeBtn = document.getElementById('themeBtn');
+    var stored = null;
+    try { stored = localStorage.getItem('delo-ottsov-theme'); } catch (e) {}
+    if (stored) root.setAttribute('data-theme', stored);
+
+    function currentTheme() {
+      var attr = root.getAttribute('data-theme');
+      if (attr) return attr;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    themeBtn.addEventListener('click', function () {
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('delo-ottsov-theme', next); } catch (e) {}
+    });
+
+    var menuBtn = document.getElementById('menuBtn');
+    var sidebar = document.getElementById('sidebar');
+    var scrim = document.getElementById('scrim');
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      scrim.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+    menuBtn.addEventListener('click', function () {
+      var open = sidebar.classList.toggle('open');
+      scrim.classList.toggle('open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    scrim.addEventListener('click', closeMenu);
+    sidebar.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeMenu);
+    });
+
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+    var sections = links
+      .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+      .filter(Boolean);
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var id = '#' + entry.target.id;
+        var link = links.find(function (a) { return a.getAttribute('href') === id; });
+        if (!link) return;
+        if (entry.isIntersecting) {
+          links.forEach(function (a) { a.removeAttribute('aria-current'); });
+          link.setAttribute('aria-current', 'true');
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+
+    sections.forEach(function (s) { observer.observe(s); });
+  })();
+</script>
+</body>
+</html>
