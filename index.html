@@ -255,18 +255,22 @@
     margin: 10px 0;
     padding: 0;
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
   }
   ul.highlights li {
-    display: grid;
-    grid-template-columns: 20px 1fr;
-    gap: 8px;
+    display: block;
     font-size: 15px;
     max-width: 68ch;
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
   }
-  ul.highlights .bullet { font-family: var(--font-mono); color: var(--accent); }
+  ul.highlights .bullet {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 
   .note-block {
     font-size: 14px;
