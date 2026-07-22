@@ -169,6 +169,17 @@ main{margin-left:var(--sidebar-w);flex:1;padding:0;min-width:0}
 .faq-item summary:hover{background:rgba(190,62,34,.04)}
 .faq-item p{padding:0 20px 18px;margin:0;color:var(--muted);max-width:100%}
 
+/* Step list */
+.step-list{display:flex;flex-direction:column;gap:14px;margin:14px 0 24px}
+.step{display:flex;gap:14px;align-items:flex-start;max-width:68ch}
+.step-num{
+  flex:0 0 34px;width:34px;height:34px;border-radius:50%;
+  background:var(--accent);color:#fff;font-weight:700;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-head)
+}
+.step div strong{display:block;margin-bottom:2px}
+.step div{color:var(--text);line-height:1.5}
+
 /* ---------- Responsive ---------- */
 @media(max-width:860px){
   .sidebar{transform:translateX(-100%);transition:transform .25s ease}
@@ -219,6 +230,7 @@ main{margin-left:var(--sidebar-w);flex:1;padding:0;min-width:0}
       <a href="#obyaz"><span class="dot"></span>11. Обязательства</a>
       <a href="#vyhod"><span class="dot"></span>12. Выход</a>
       <a href="#faq"><span class="dot"></span>Частые вопросы</a>
+      <a href="#cta"><span class="dot"></span>Как войти в дело</a>
     </nav>
     <div class="sb-cta">
       <a href="tel:+79175590101" class="btn">Вступить в дело</a>
@@ -463,12 +475,20 @@ main{margin-left:var(--sidebar-w);flex:1;padding:0;min-width:0}
         </details>
       </section>
 
-      <div class="cta-block" id="cta">
-        <h2>Вступай в Дело</h2>
-        <p>Если ты готов прикоснуться к Делу Отцов, стать сильнее и строить своё будущее — оставь заявку. С тобой свяжутся для собеседования.</p>
-        <div class="who">Основатель кооператива — Горбунов Олег Владимирович</div>
-        <a href="tel:+79175590101" class="btn">📞 Связаться с основателем</a>
-      </div>
+      <section class="section" id="cta">
+        <div class="label">Следующий шаг</div>
+        <h2>Как войти в дело</h2>
+        <div class="step-list">
+          <div class="step"><span class="step-num">1</span><div><strong>Связываешься с основателем.</strong> Нажимаешь кнопку ниже — звонишь или пишешь напрямую Олегу.</div></div>
+          <div class="step"><span class="step-num">2</span><div><strong>Проходишь собеседование.</strong> Разговор один на один — кто ты, что умеешь, зачем тебе это.</div></div>
+          <div class="step"><span class="step-num">3</span><div><strong>Входишь в костяк.</strong> Если ты свой — начинаешь работать наравне со всеми и строить общее дело.</div></div>
+        </div>
+        <div class="cta-block" style="padding-top:8px">
+          <p>Если ты готов стать сильнее и строить своё будущее в мужском деле — сделай первый шаг прямо сейчас.</p>
+          <div class="who">Основатель кооператива — Горбунов Олег Владимирович</div>
+          <a href="tel:+79175590101" class="btn">📞 Связаться с основателем</a>
+        </div>
+      </section>
 
     </div>
   </main>
