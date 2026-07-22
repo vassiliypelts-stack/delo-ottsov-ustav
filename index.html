@@ -4,370 +4,441 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Дело Отцов — Сутевой устав</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*,
-*::before,
-*::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-body {
-  font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, system-ui, sans-serif;
-  background: #fff;
-  color: #1a1a2e;
-  line-height: 1.6;
-  font-size: 16px;
+:root{
+  --ink:#0F2B22;--ink-2:#16382C;--ink-3:#1E4638;
+  --paper:#F3F4EF;--card:#FFFFFF;
+  --text:#20261F;--muted:#67715F;
+  --accent:#BE3E22;--accent-deep:#9A2F16;
+  --brass:#A98338;--ok:#2F8F5B;
+  --line:#DFE3D6;--line-dark:rgba(255,255,255,.14);
+  --font-head:'Bitter',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Tahoma,sans-serif;
+  --font-mono:'IBM Plex Mono',Consolas,monospace;
+  --sidebar-w:300px;--radius:10px;
 }
-a { color: inherit; text-decoration: none; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);background:var(--paper);color:var(--text);font-size:16.5px;line-height:1.7}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
 
-.container { max-width: 1048px; margin: 0 auto; padding: 0 24px; }
+/* ---------- Layout ---------- */
+.layout{display:flex;min-height:100vh}
 
-/* badge */
-.badge {
-  display: inline-block;
-  background: #eef5ff;
-  color: #1a56db;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 4px 14px;
-  border-radius: 20px;
-  letter-spacing: 0.01em;
+/* ---------- Sidebar ---------- */
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);
+  background:linear-gradient(175deg,var(--ink) 0%,var(--ink-2) 100%);
+  color:#EDF2EA;display:flex;flex-direction:column;
+  z-index:100;overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:var(--ink-3) transparent;
 }
-.label-section {
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #1a56db;
-  margin-bottom: 12px;
+.sb-head{padding:26px 24px 18px;border-bottom:1px solid var(--line-dark)}
+.sb-brand{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--brass);margin-bottom:8px
+}
+.sb-title{
+  font-family:var(--font-head);font-weight:700;font-size:1.22rem;line-height:1.3;color:#fff
+}
+.sb-sub{font-size:.8rem;color:#9DB0A2;margin-top:6px}
+.sb-nav{flex:1;padding:14px 12px;display:flex;flex-direction:column;gap:1px}
+.sb-nav a{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 12px;border-radius:8px;
+  color:#C9D6C9;text-decoration:none;font-size:.88rem;line-height:1.3;
+  transition:background .18s ease,color .18s ease
+}
+.sb-nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb-nav a .dot{
+  flex:0 0 16px;width:16px;height:16px;border-radius:50%;
+  border:1.6px solid #55705F;position:relative;transition:all .25s ease
+}
+.sb-nav a .dot::after{
+  content:"";position:absolute;inset:2px;
+  background:no-repeat center/8px url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"%3E%3Cpath d="M2 6.5 5 9l5-6" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+  opacity:0;transform:scale(.4);transition:all .25s ease
+}
+.sb-nav a.active .dot{border-color:var(--brass);box-shadow:0 0 0 3px rgba(169,131,56,.25)}
+.sb-nav a.active .dot::after{opacity:1;transform:scale(1)}
+.sb-nav a.active{color:#fff}
+.sb-cta{
+  padding:14px 20px 20px;border-top:1px solid var(--line-dark);text-align:center
+}
+.sb-cta .btn{
+  display:inline-block;background:var(--brass);color:var(--ink);
+  font-weight:600;font-size:.8rem;padding:10px 20px;border-radius:8px;
+  transition:background .2s
+}
+.sb-cta .btn:hover{background:#C9A84A}
+.sb-cta .note{font-size:.7rem;color:#8FA394;margin-top:8px}
+
+.menu-toggle{display:none;position:fixed;top:14px;left:14px;z-index:110;
+  width:40px;height:40px;border:1px solid var(--line);background:var(--card);
+  border-radius:8px;cursor:pointer;font-size:18px;color:var(--text)}
+
+/* ---------- Main ---------- */
+main{margin-left:var(--sidebar-w);flex:1;padding:0;min-width:0}
+.content{max-width:740px;padding:52px 48px 80px}
+
+.section{padding:40px 0 36px;border-bottom:1px solid var(--line)}
+.section:first-of-type{padding-top:0}
+.section:last-of-type{border-bottom:none}
+.section .label{
+  font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);margin-bottom:6px
+}
+.section h2{
+  font-family:var(--font-head);font-weight:700;font-size:1.55rem;line-height:1.25;
+  margin-bottom:14px;letter-spacing:-.01em
+}
+.section p{margin-bottom:12px;max-width:68ch;color:var(--text)}
+.section p:last-child{margin-bottom:0}
+.section strong{font-weight:600}
+.section ul{margin:4px 0 12px;padding:0;list-style:none}
+.section ul li{padding-left:20px;position:relative;margin-bottom:6px;max-width:68ch}
+.section ul li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+
+/* Cards grid */
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 6px}
+.card{
+  border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;
+  background:var(--card);transition:box-shadow .2s
+}
+.card:hover{box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.card .tag{
+  font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--muted);margin-bottom:5px
+}
+.card strong{display:block;font-size:1rem;margin-bottom:3px}
+.card p{font-size:.9rem;color:var(--muted)}
+
+/* Hero header */
+.hero{margin-bottom:8px}
+.hero .badge{
+  display:inline-block;background:rgba(190,62,34,.1);color:var(--accent);
+  font-size:.75rem;font-weight:600;padding:3px 12px;border-radius:20px;
+  letter-spacing:.02em;margin-bottom:10px
+}
+.hero h1{
+  font-family:var(--font-head);font-weight:700;font-size:2.4rem;line-height:1.1;
+  letter-spacing:-.02em;margin-bottom:6px
+}
+.hero .sub{font-size:1.05rem;color:var(--muted);margin-bottom:18px}
+.hero .founder{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:12px 16px;font-size:.88rem;line-height:1.6;margin-top:6px
+}
+.hero .founder strong{font-weight:600}
+
+/* CTA block */
+.cta-block{padding:36px 0;text-align:center}
+.cta-block h2{font-family:var(--font-head);font-weight:700;font-size:1.4rem;margin-bottom:8px}
+.cta-block p{color:var(--muted);max-width:44ch;margin:0 auto 16px;font-size:.95rem}
+.cta-block .phone{font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.cta-block .who{font-size:.88rem;color:var(--muted);margin-bottom:16px}
+.cta-block .btn{
+  display:inline-block;background:var(--accent);color:#fff;
+  font-weight:600;font-size:.95rem;padding:12px 32px;border-radius:8px;
+  transition:background .2s
+}
+.cta-block .btn:hover{background:var(--accent-deep)}
+
+/* Scroll margin for fixed sidebar */
+.section{scroll-margin-top:20px}
+
+/* ---------- Responsive ---------- */
+@media(max-width:860px){
+  .sidebar{transform:translateX(-100%);transition:transform .25s ease}
+  .sidebar.open{transform:translateX(0)}
+  .menu-toggle{display:block}
+  main{margin-left:0}
+  .content{padding:72px 24px 48px}
+  .card-grid{grid-template-columns:1fr}
+  .hero h1{font-size:1.8rem}
+  .scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:95}
+  .scrim.open{display:block}
 }
 
-/* hero */
-.hero {
-  padding: 48px 0 40px;
-  border-bottom: 1px solid #eaeaea;
+/* ---------- Progress bar ---------- */
+#progress{
+  position:fixed;top:0;left:var(--sidebar-w);right:0;height:3px;
+  background:var(--brass);z-index:120;transform-origin:0 50%;
+  transform:scaleX(0);transition:transform .1s linear
 }
-.hero h1 {
-  font-size: 38px;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: 6px;
-}
-.hero .subtitle {
-  font-size: 18px;
-  color: #666;
-  margin-bottom: 20px;
-}
-.hero .founder-box {
-  background: #f8f6f2;
-  border: 1px solid #e8e0cc;
-  border-radius: 8px;
-  padding: 14px 18px;
-  font-size: 14px;
-  line-height: 1.6;
-  margin-top: 16px;
-}
-.hero .founder-box strong { font-weight: 600; }
-
-/* sections */
-.section {
-  padding: 40px 0;
-  border-bottom: 1px solid #eaeaea;
-}
-.section:last-of-type { border-bottom: none; }
-.section h2 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
-}
-.section p {
-  margin-bottom: 12px;
-  max-width: 72ch;
-  color: #333;
-}
-.section p:last-child { margin-bottom: 0; }
-
-/* values list */
-.values-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-.values-list li {
-  padding-left: 24px;
-  position: relative;
-}
-.values-list li .mark {
-  position: absolute;
-  left: 0;
-  top: 2px;
-  color: #1a56db;
-  font-weight: 700;
-  font-size: 15px;
-}
-.values-list li strong { display: block; font-weight: 700; margin-bottom: 3px; }
-
-/* feature grid */
-.feature-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 4px;
-}
-.feature-card {
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  padding: 18px 20px;
-  transition: box-shadow 0.2s;
-}
-.feature-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
-.feature-card .num {
-  font-size: 12px;
-  font-weight: 600;
-  color: #1a56db;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 6px;
-}
-.feature-card strong { display: block; font-size: 15px; margin-bottom: 4px; }
-.feature-card p { font-size: 14px; color: #555; margin: 0; }
-.feature-card p:last-child { margin-bottom: 0; }
-
-/* rules list */
-.rules-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.rules-list li {
-  padding-left: 20px;
-  position: relative;
-  max-width: 72ch;
-}
-.rules-list li::before {
-  content: "—";
-  position: absolute;
-  left: 0;
-  color: #1a56db;
-}
-
-/* cta */
-.cta-section {
-  padding: 48px 0;
-  text-align: center;
-}
-.cta-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
-.cta-section p { color: #555; max-width: 48ch; margin: 0 auto 20px; font-size: 15px; }
-.cta-section .phone {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: 4px;
-}
-.cta-section .founder-name { font-size: 14px; color: #666; margin-bottom: 18px; }
-.btn {
-  display: inline-block;
-  background: #1a56db;
-  color: #fff;
-  font-weight: 600;
-  font-size: 15px;
-  padding: 12px 32px;
-  border-radius: 8px;
-  transition: background 0.2s;
-}
-.btn:hover { background: #1648c0; }
-
-/* responsive */
-@media (max-width: 700px) {
-  .hero h1 { font-size: 28px; }
-  .feature-grid { grid-template-columns: 1fr; }
-  .hero { padding: 32px 0 28px; }
-  .section { padding: 28px 0; }
-}
+@media(max-width:860px){#progress{left:0}}
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="container">
-    <span class="badge">Сутевой устав</span>
-    <h1>Дело Отцов</h1>
-    <p class="subtitle">Мужское сообщество вокруг реального производства</p>
-    <div class="founder-box">
-      <strong>Основатель кооператива и сообщества:</strong> Горбунов Олег Владимирович<br>
-      <strong>Телефон:</strong> +7 917 559 01 01
+<div class="layout">
+
+  <button class="menu-toggle" id="menuBtn" aria-label="Меню">☰</button>
+  <div class="scrim" id="scrim"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-head">
+      <div class="sb-brand">Сутевой устав</div>
+      <div class="sb-title">Дело Отцов</div>
+      <div class="sb-sub">Мужское сообщество вокруг реального производства</div>
     </div>
-  </div>
+    <nav class="sb-nav" aria-label="Разделы">
+      <a href="#vstuplenie"><span class="dot"></span>Вступление</a>
+      <a href="#sut"><span class="dot"></span>1. Суть</a>
+      <a href="#produkt"><span class="dot"></span>2. Продукт</a>
+      <a href="#ekonomika"><span class="dot"></span>3. Экономика</a>
+      <a href="#how"><span class="dot"></span>4. Как это работает</a>
+      <a href="#kto"><span class="dot"></span>5. Кто может войти</a>
+      <a href="#pravila"><span class="dot"></span>6. Правила</a>
+      <a href="#upravlenie"><span class="dot"></span>7. Управление</a>
+      <a href="#dohod"><span class="dot"></span>8. Доход</a>
+      <a href="#razvitie"><span class="dot"></span>9. Развитие</a>
+      <a href="#nasledie"><span class="dot"></span>10. Наследие и дети</a>
+      <a href="#obyaz"><span class="dot"></span>11. Обязательства</a>
+      <a href="#vyhod"><span class="dot"></span>12. Выход</a>
+    </nav>
+    <div class="sb-cta">
+      <a href="#cta" class="btn">Вступить в дело</a>
+      <div class="note">+7 917 559 01 01</div>
+    </div>
+  </aside>
+
+  <main>
+    <div id="progress"></div>
+    <div class="content">
+
+      <div class="hero">
+        <div class="badge">Сутевой устав</div>
+        <h1>Дело Отцов</h1>
+        <p class="sub">Мужское сообщество вокруг реального производства</p>
+        <div class="founder">
+          <strong>Основатель кооператива и сообщества:</strong> Горбунов Олег Владимирович<br>
+          <strong>Телефон:</strong> +7 917 559 01 01
+        </div>
+      </div>
+
+      <section class="section" id="vstuplenie">
+        <h2>Вступление</h2>
+        <p>Я 35 лет занимаюсь бизнесом. С нуля прошёл путь до собственного производства, полиграфического комбината, объектов недвижимости. Деньги были — большие. Но когда они перестали давать смысл, а семейная жизнь разрушилась — я начал искать ответы.</p>
+        <p>Я понял одну вещь: в нашей стране идёт системное разрушение мужского воспитания. Мужчины перестали опираться друг на друга. Каждый сам за себя — и каждый сам не справляется. Гонка, долги, разводы, потерянное время. 24/7 без результата.</p>
+        <p>Меня воспитал отец. С 10 лет я жил с ним круглосуточно — сам готовил, стирал, работал. В восьмом классе уже была трудовая книжка. Я знаю, что значит отцовское воспитание. И я вижу, что именно это мы теряем.</p>
+        <p><strong>Дело Отцов</strong> родилось из этого опыта. Не политика, не религия, не секта. Мужское сообщество вокруг реального дела. Контейнерное строительство — то, что можно построить своими руками, поставить на своей земле, передать своим.</p>
+        <p>Когда у мужика есть база, дело и плечо рядом — он всё остальное решает сам.</p>
+      </section>
+
+      <section class="section" id="sut">
+        <div class="label">Раздел 1</div>
+        <h2>Суть</h2>
+        <p>Кооператив для мужчин, которые хотят объединяться. Которые чувствуют, что имеют способности, хотят реализовать свой потенциал, вылезти из проблем, стать сильнее. Кому нужен доход, своё дело и мужское плечо рядом. Кто хочет выйти из вечной гонки, перестать ебашить 24/7 без результата.</p>
+        <p>Это сообщество деловых активных небезразличных мужчин — со своей моделью поведения, своим культурным кодом. Символ — Сварга. Потому что это патриотический проект.</p>
+        <p>Кооператив существует, в том числе, как поддержка мужчинам, оказавшимся в трудной ситуации из-за несправедливости со стороны женщин или судебной системы, которая ставит мужчину в неравное положение, отбирает истинную власть и силу.</p>
+        <p>Не благотворительность и не инвестклуб. Принцип: вкладываешься в общее — общее даёт тебе.</p>
+        <p><strong>На чём стоим:</strong></p>
+        <ul>
+          <li><strong>Служение Отечеству и стране.</strong> Общее — ценнее частного. Определённая форма служения и самопожертвования ради общей цели.</li>
+          <li><strong>Почитание отцов, боготворение.</strong> Не просто уважение — беспрекословное почитание отцов. Культ отцов с обрядами, молитвами, мероприятиями, благодарностью отцам за всё, что они сделали.</li>
+          <li><strong>Правильное отношение к женщинам.</strong> Прекращение войны полов. Женщины — помощницы и союзницы, а не соперницы. Мы не побеждаем в этой войне — мы заканчиваем её напрочь, лишаем смысла, почвы и повода. Женщина становится напарником, а не противником. Это основа для здорового общества и здоровой семьи.</li>
+        </ul>
+        <p>Важно понимать: я сам знаю, что такое пойти на поводу, потерять контроль, пропить и прогулять то, что строилось годами. Взял двух красивых женщин, уехал в Сочи, поселился в гостиницу. В этом — не слабость, а опыт. В умении признать ошибку, сделать выводы и построить систему, которая не даёт повторить это снова — есть мужская сила и успешность. Это не красивая философия, а выстраданное понимание: одиночка не справляется. Нужна структура, братство, плечо. И порядок.</p>
+      </section>
+
+      <section class="section" id="produkt">
+        <div class="label">Раздел 2</div>
+        <h2>Продукт</h2>
+        <p>Есть понятный продукт — <strong>домик из контейнера</strong>. Мобильный, утеплённый, с водой и светом, автономными системами.</p>
+        <p>Стройка 3 месяца — не год. Себестоимость одного контейнера 1,5–2 млн рублей. Установка на месте — манипулятором за 15 минут.</p>
+        <p>Контейнер абсолютно ликвидный — перевозится куда угодно: Кремль, Сочи, море — поставил и живёшь. Можно маскировать под техслужбы, а внутри полноценный дом с мойкой, садом, всем хозяйством.</p>
+        <p>Контейнер с автономной системой воды — в квартире такого нет. Своя земля, своя база, своя территория под мужской менталитет.</p>
+        <p>Мы строим, продаём и сдаём в аренду. Массовое предпринимательство для предпринимателей по контейнерному строительству. Работяги режут, варят, монтируют своими руками. В этом есть мужская сила, успешность и гармония.</p>
+      </section>
+
+      <section class="section" id="ekonomika">
+        <div class="label">Раздел 3</div>
+        <h2>Экономика</h2>
+        <div class="card-grid">
+          <div class="card">
+            <div class="tag">Себестоимость</div>
+            <strong>1,5–2 млн ₽</strong>
+            <p>за контейнер под ключ, стройка 3 месяца</p>
+          </div>
+          <div class="card">
+            <div class="tag">Аренда</div>
+            <strong>20–25 тыс. ₽/мес</strong>
+            <p>регулярный пассивный доход со сдачи</p>
+          </div>
+          <div class="card">
+            <div class="tag">Ликвидность</div>
+            <strong>Абсолютная</strong>
+            <p>перевозится и продаётся в любом месте</p>
+          </div>
+          <div class="card">
+            <div class="tag">Модель</div>
+            <strong>Один котёл</strong>
+            <p>доход с недвижимости и контейнеров — вместе, неделимый фонд</p>
+          </div>
+        </div>
+        <p>Контейнер в аренде приносит больше, чем проданный. Как квартира за 20 лет аренды приносит больше своей рыночной стоимости. Такого соотношения цена / ликвидность на рынке сейчас нет нигде.</p>
+      </section>
+
+      <section class="section" id="how">
+        <div class="label">Раздел 4</div>
+        <h2>Как это работает</h2>
+        <p><strong>Установка.</strong> Привезли контейнер манипулятором — через 15 минут он стоит на месте. Подключил автономные системы — живёшь.</p>
+        <p><strong>Размещение.</strong> Контейнер маскируется под техслужбы, сервисные боксы, мобильные офисы — никаких проблем с надзором. Внутри — полноценный дом.</p>
+        <p><strong>Корпоративный сервис.</strong> Можно организовать службу по уходу и обслуживанию таких домов. Это дополнительный регулярный доход.</p>
+        <p><strong>Локации.</strong> У меня есть недвижимость в Геленджике и Сочи — есть где ставить и сдавать с первой же минуты.</p>
+      </section>
+
+      <section class="section" id="kto">
+        <div class="label">Раздел 5</div>
+        <h2>Кто может войти</h2>
+        <p>Мужчины, у которых есть способности и желание развиваться. Строители и предприниматели. Те, кто хочет служить стране через реальное дело. Лидеры мнений — мужики на одной волне.</p>
+        <p><strong>Кто не зайдёт:</strong> индивидуалисты, люди с западной капиталистической прошивкой — «каждый сам за себя». Те, кто предавал своих единомышленников.</p>
+        <p><strong>Мы капитал не объединяем, капитал нам не нужен.</strong> Каждый получает долю от общего результата, потому что вложил труд.</p>
+      </section>
+
+      <section class="section" id="pravila">
+        <div class="label">Раздел 6</div>
+        <h2>Правила</h2>
+        <p>Организация с понятными правилами:</p>
+        <ul>
+          <li>Чёткий вход и выход</li>
+          <li>Как себя вести внутри</li>
+          <li>Как решаются конфликты</li>
+        </ul>
+        <p>Споры решает старший. Уполномоченные — старшины, деды. Решение принимается советом. У каждого есть вышестоящий, которого он слушается как наставника. Вертикаль, иерархия, зона личной ответственности. Потому что сейчас никто ни за что не отвечает.</p>
+        <p><strong>Личное — табу.</strong> Личные интимные истории, трагедии каждого остаются внутри круга и никогда не выносятся наружу.</p>
+        <p><strong>Перспектива:</strong> от рядового участника до старшины, от старшины до совета. Через дело, испытания, доказанную состоятельность.</p>
+      </section>
+
+      <section class="section" id="upravlenie">
+        <div class="label">Раздел 7</div>
+        <h2>Управление</h2>
+        <div class="card-grid">
+          <div class="card">
+            <div class="tag">Совет старшин</div>
+            <strong>Ключевые решения</strong>
+            <p>покупка актива, приём участника, расходование из фонда. Входят основатель и первые участники, подтвердившие состоятельность делом</p>
+          </div>
+          <div class="card">
+            <div class="tag">Общее собрание</div>
+            <strong>Стратегия</strong>
+            <p>высший орган для стратегических вопросов. Собирается по необходимости</p>
+          </div>
+          <div class="card">
+            <div class="tag">Координатор</div>
+            <strong>Оперативное управление</strong>
+            <p>организация стройки, работа с арендаторами. Сегодня — Олег. Задача — вырастить преемника</p>
+          </div>
+          <div class="card">
+            <div class="tag">Вертикаль</div>
+            <strong>Личная ответственность</strong>
+            <p>у каждого есть вышестоящий наставник и нижестоящие, за которых он отвечает</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="dohod">
+        <div class="label">Раздел 8</div>
+        <h2>Доход</h2>
+        <p>Пассивный доход от аренды контейнеров — каждый участник получает долю от общего котла. Но чтобы этот доход появился, нужно вложить труд. Кооператив — не покупка доли, а общее дело. Чем больше вложил — тем больше доля.</p>
+      </section>
+
+      <section class="section" id="razvitie">
+        <div class="label">Раздел 9</div>
+        <h2>Развитие и воспроизводство мужчин</h2>
+        <p>Часть дохода идёт не в карман, а на развитие: закупка новых контейнеров, расширение производства, увеличение арендного портфеля.</p>
+        <p>Но главное — это воспитание и воспроизводство мужчин. В стране идёт системное разрушение того, что должно передаваться от отца к сыну: умение держать слово, отвечать за свои действия, работать руками и головой. Мы это меняем — не на словах, а через реальное дело.</p>
+        <p>Все деньги инвестируются в развитие людей. Перспективные участники поддерживаются, проходят школу дела, становятся наставниками. <strong>Главный капитал — это люди.</strong> Надёжные, способные мужчины, на которых можно опереться. Вложился в человека — получил прибыль на десятилетия.</p>
+        <p>Пассивный доход — это инструмент для роста, а не «сидеть и получать». Схема: вложил труд и деньги → получил доход → часть реинвестировал → построили новый контейнер → доход вырос.</p>
+      </section>
+
+      <section class="section" id="nasledie">
+        <div class="label">Раздел 10</div>
+        <h2>Наследие и дети</h2>
+        <p>Кооператив и его участники берут на себя заботу о наследниках. За детьми присматриваются, помогают в трудную минуту. Поддержка перспективных — чтобы наследие не было проедено, а пошло в дело.</p>
+      </section>
+
+      <section class="section" id="obyaz">
+        <div class="label">Раздел 11</div>
+        <h2>Обязательства участника</h2>
+        <p>Если есть деньги — любая польза приветствуется. Правила входа обсуждаются и прописываются по мере формирования сообщества.</p>
+        <p>Система воспитания и дисциплины — по системе Макаренко. Воспитательная и трудовая. Система свободных отрядов с чёткой ответственностью. Коллектив — это огромная сила, которая перемалывает слабости и выковывает сильных.</p>
+        <p>Наша задача — быстро поставить человека на ноги. Нам инвалиды не нужны — активные бойцы. Дальше он встаёт на ноги — и мы на эти ноги опираемся.</p>
+      </section>
+
+      <section class="section" id="vyhod">
+        <div class="label">Раздел 12</div>
+        <h2>Выход</h2>
+        <p><strong>При выходе</strong> — участник может забрать свою делимую часть вклада. Часть уходит в неделимый фонд навсегда.</p>
+        <p><strong>Исключают</strong> — за нарушение правил, воровство, интриги, подрыв репутации. Решение выносится общим советом.</p>
+        <p>Всё прозрачно. Никаких сюрпризов.</p>
+      </section>
+
+      <div class="cta-block" id="cta">
+        <h2>Вступай в Дело</h2>
+        <p>Если ты готов прикоснуться к Делу Отцов, стать сильнее и строить своё будущее — оставь заявку. С тобой свяжутся для собеседования.</p>
+        <div class="phone">+7 917 559 01 01</div>
+        <div class="who">Основатель кооператива — Горбунов Олег Владимирович</div>
+        <a href="https://vassiliypelts-stack.github.io/delo-ottsov-ustav/" class="btn">Оставить заявку</a>
+      </div>
+
+    </div>
+  </main>
 </div>
 
-<section class="section">
-  <div class="container">
-    <h2>Вступление</h2>
-    <p>Я 35 лет занимаюсь бизнесом. С нуля прошёл путь до собственного производства, полиграфического комбината, объектов недвижимости. Деньги были — большие. Но когда они перестали давать смысл, а семейная жизнь разрушилась — я начал искать ответы.</p>
-    <p>Я понял одну вещь: в нашей стране идёт системное разрушение мужского воспитания. Мужчины перестали опираться друг на друга. Каждый сам за себя — и каждый сам не справляется.</p>
-    <p>Меня воспитал отец. С 10 лет я жил с ним круглосуточно — сам готовил, стирал, работал. В восьмом классе уже была трудовая книжка. Я знаю, что значит отцовское воспитание. И я вижу, что именно это мы теряем.</p>
-    <p><strong>Дело Отцов</strong> родилось из этого опыта. Не политика, не религия, не секта. Мужское сообщество вокруг реального дела. Контейнерное строительство — то, что можно построить своими руками, поставить на своей земле, передать своим.</p>
-    <p>Когда у мужика есть база, дело и плечо рядом — он всё остальное решает сам.</p>
-  </div>
-</section>
+<script>
+(function(){
+  // Sidebar toggle
+  var btn = document.getElementById('menuBtn');
+  var sb = document.getElementById('sidebar');
+  var scrim = document.getElementById('scrim');
+  btn.addEventListener('click', function(){
+    sb.classList.toggle('open'); scrim.classList.toggle('open');
+    btn.textContent = sb.classList.contains('open') ? '✕' : '☰';
+  });
+  scrim.addEventListener('click', function(){
+    sb.classList.remove('open'); scrim.classList.remove('open');
+    btn.textContent = '☰';
+  });
+  sb.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      sb.classList.remove('open'); scrim.classList.remove('open');
+      btn.textContent = '☰';
+    });
+  });
 
-<section class="section">
-  <div class="container">
-    <h2>1. Суть</h2>
-    <p>Кооператив для мужчин, которые хотят объединяться. Которые чувствуют, что имеют способности, хотят реализовать свой потенциал, вылезти из проблем, стать сильнее. Кому нужен доход, своё дело и мужское плечо рядом. Кто хочет выйти из вечной гонки, перестать ебашить 24/7 без результата.</p>
-    <p>Это сообщество деловых активных небезразличных мужчин — со своей моделью поведения, своим культурным кодом. Символ — Сварга. Потому что это патриотический проект.</p>
-    <p>Кооператив существует, в том числе, как поддержка мужчинам, оказавшимся в трудной ситуации из-за несправедливости со стороны женщин или судебной системы, которая ставит мужчину в неравное положение, отбирает истинную власть и силу.</p>
-    <p>Не благотворительность и не инвестклуб. Принцип: вкладываешься в общее — общее даёт тебе.</p>
-    <p style="font-weight:600;margin-top:18px">На чём стоим:</p>
-    <ul class="values-list">
-      <li><span class="mark">—</span><strong>Служение Отечеству и стране.</strong> Общее — ценнее частного. Определённая форма служения и самопожертвования ради общей цели.</li>
-      <li><span class="mark">—</span><strong>Почитание отцов.</strong> Не просто уважение — беспрекословное почитание отцов. Культ отцов с обрядами, молитвами, мероприятиями, благодарностью отцам за всё, что они сделали.</li>
-      <li><span class="mark">—</span><strong>Правильное отношение к женщинам.</strong> Прекращение войны полов. Женщины — помощницы и союзницы, а не соперницы и не конкуренты за ресурсы и власть. Мы не побеждаем в этой войне — мы заканчиваем её напрочь, лишаем смысла, почвы и повода. Женщина становится напарником, а не противником. Это основа для здорового общества и здоровой семьи.</li>
-    </ul>
-  </div>
-</section>
+  // Active section tracking
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sb-nav a'));
+  var sections = links.map(function(a){
+    var id = a.getAttribute('href');
+    return id ? document.querySelector(id) : null;
+  }).filter(Boolean);
 
-<section class="section">
-  <div class="container">
-    <h2>2. Продукт</h2>
-    <p>Есть понятный продукт — <strong>домик из контейнера</strong>. Мобильный, утеплённый, с водой и светом, автономными системами.</p>
-    <p>Стройка 3 месяца — не год. Себестоимость одного контейнера 1,5–2 млн рублей. Установка на месте — манипулятором за 15 минут.</p>
-    <p>Контейнер абсолютно ликвидный — перевозится куда угодно: Кремль, Сочи, море — поставил и живёшь. Можно маскировать под техслужбы, а внутри полноценный дом с мойкой, садом, всем хозяйством.</p>
-    <p>Мы строим, продаём и сдаём в аренду. Массовое предпринимательство для предпринимателей по контейнерному строительству.</p>
-  </div>
-</section>
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var link = links.find(function(l){ return l.getAttribute('href') === '#' + entry.target.id; });
+      if(!link) return;
+      if(entry.isIntersecting){
+        links.forEach(function(l){ l.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-20% 0px -60% 0px', threshold:0});
+  sections.forEach(function(s){ observer.observe(s); });
 
-<section class="section">
-  <div class="container">
-    <h2>3. Экономика</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="num">Себестоимость</div>
-        <strong>1,5–2 млн ₽</strong>
-        <p>за контейнер под ключ, стройка 3 месяца</p>
-      </div>
-      <div class="feature-card">
-        <div class="num">Аренда</div>
-        <strong>20 000–25 000 ₽/мес</strong>
-        <p>регулярный пассивный доход со сдачи</p>
-      </div>
-      <div class="feature-card">
-        <div class="num">Ликвидность</div>
-        <strong>Абсолютная</strong>
-        <p>перевозится и продаётся в любом месте без потери стоимости</p>
-      </div>
-      <div class="feature-card">
-        <div class="num">Модель</div>
-        <strong>Один котёл</strong>
-        <p>доход с недвижимости и контейнеров — вместе, неделимый фонд</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>4. Как это работает</h2>
-    <p><strong>Установка.</strong> Привезли контейнер манипулятором — через 15 минут он стоит на месте. Подключил автономные системы — живёшь.</p>
-    <p><strong>Размещение.</strong> Контейнер маскируется под техслужбы, сервисные боксы, мобильные офисы — никаких проблем с надзором. Внутри — полноценный дом.</p>
-    <p><strong>Корпоративный сервис.</strong> Можно организовать службу по уходу и обслуживанию таких домов. Это дополнительный регулярный доход.</p>
-    <p><strong>Локации.</strong> У меня есть недвижимость в Геленджике и Сочи — есть где ставить и сдавать с первой же минуты.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>5. Кто может войти</h2>
-    <p>Мужчины, у которых есть способности и желание развиваться. Строители и предприниматели. Те, кто хочет служить стране через реальное дело.</p>
-    <p><strong>Кто не зайдёт:</strong> индивидуалисты, люди с западной капиталистической прошивкой — «каждый сам за себя». Те, кто предавал своих единомышленников.</p>
-    <p><strong>Мы капитал не объединяем, капитал нам не нужен.</strong> Каждый получает долю от общего результата, потому что вложил труд.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>6. Правила</h2>
-    <p>Организация с понятными правилами:</p>
-    <ul class="rules-list">
-      <li>Чёткий вход и выход</li>
-      <li>Как себя вести внутри</li>
-      <li>Как решаются конфликты</li>
-    </ul>
-    <p style="margin-top:14px"><strong>Личное — табу.</strong> Личные истории, трагедии каждого остаются внутри круга и никогда не выносятся наружу.</p>
-    <p><strong>Перспектива:</strong> от рядового участника до старшины, от старшины до совета. Через дело, испытания, доказанную состоятельность.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>7. Управление</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="num">Совет старшин</div>
-        <strong>Ключевые решения</strong>
-        <p>покупка актива, приём участника, расходование из фонда. Входят основатель и первые участники, подтвердившие состоятельность делом.</p>
-      </div>
-      <div class="feature-card">
-        <div class="num">Общее собрание</div>
-        <strong>Стратегия</strong>
-        <p>высший орган для стратегических вопросов. Собирается по необходимости.</p>
-      </div>
-      <div class="feature-card">
-        <div class="num">Координатор</div>
-        <strong>Оперативное управление</strong>
-        <p>организация стройки, работа с арендаторами. Сегодня — Олег. Задача — вырастить преемника.</p>
-      </div>
-      <div class="feature-card">
-        <div class="num">Вертикаль</div>
-        <strong>Личная ответственность</strong>
-        <p>у каждого есть вышестоящий наставник и нижестоящие, за которых он отвечает.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>8. Доход</h2>
-    <p>Пассивный доход от аренды контейнеров — каждый участник получает долю от общего котла. Но чтобы этот доход появился, нужно вложить труд. Кооператив — не покупка доли, а общее дело. Чем больше вложил — тем больше доля.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>9. Развитие и воспроизводство мужчин</h2>
-    <p>Часть дохода идёт не в карман, а на развитие: закупка новых контейнеров, расширение производства, увеличение арендного портфеля.</p>
-    <p>Но главное — это воспитание и воспроизводство мужчин. В стране идёт системное разрушение того, что должно передаваться от отца к сыну: умение держать слово, отвечать за свои действия, работать руками и головой. Мы это меняем — не на словах, а через реальное дело.</p>
-    <p>Все деньги инвестируются в развитие людей. Перспективные участники поддерживаются, проходят школу дела, становятся наставниками. Главный капитал — это люди. Надёжные мужчины, на которых можно опереться.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>10. Наследие и дети</h2>
-    <p>Кооператив и его участники берут на себя заботу о наследниках. За детьми присматриваются, помогают в трудную минуту. Поддержка перспективных — чтобы наследие не было проедено, а пошло в дело.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>11. Обязательства участника</h2>
-    <p>Если есть деньги — любая польза приветствуется. Правила входа обсуждаются и прописываются по мере формирования сообщества.</p>
-    <p>Система воспитания и дисциплины — по системе Макаренко. Воспитательная и трудовая. Система свободных отрядов с чёткой ответственностью. Коллектив — это огромная сила, которая перемалывает слабости и выковывает сильных.</p>
-    <p>Наша задача — быстро поставить человека на ноги. Нам инвалиды не нужны — активные бойцы. Дальше он встаёт на ноги — и мы на эти ноги опираемся.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>12. Выход</h2>
-    <p><strong>При выходе</strong> — участник может забрать свою делимую часть вклада. Часть уходит в неделимый фонд навсегда.</p>
-    <p><strong>Исключают</strong> — за нарушение правил, воровство, интриги, подрыв репутации. Решение выносится общим советом.</p>
-    <p>Всё прозрачно. Никаких сюрпризов.</p>
-  </div>
-</section>
-
-<div class="cta-section" style="border-top:1px solid #eaeaea">
-  <div class="container">
-    <h2>Вступай в Дело</h2>
-    <p>Если ты готов прикоснуться к Делу Отцов, стать сильнее и строить своё будущее — оставь заявку. С тобой свяжутся для собеседования.</p>
-    <div class="phone">+7 917 559 01 01</div>
-    <div class="founder-name">Основатель кооператива — Горбунов Олег Владимирович</div>
-    <a href="#" class="btn">Оставить заявку</a>
-  </div>
-</div>
-
+  // Progress bar
+  var bar = document.getElementById('progress');
+  window.addEventListener('scroll', function(){
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) : 0;
+    bar.style.transform = 'scaleX(' + pct + ')';
+  });
+})();
+</script>
 </body>
 </html>
