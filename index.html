@@ -6,89 +6,82 @@
 <title>Дело Отцов — Сутевой устав</title>
 <style>
   :root {
-    --bg: #f3efe6;
-    --panel: #e3dccb;
-    --panel-ink: #1e1a14;
-    --ink: #1e1a14;
-    --ink-muted: #6b6152;
-    --accent: #8a5e1f;
-    --accent-ink: #fbf6ea;
-    --rule: #cdc2a8;
-    --seal: #7d5a26;
-    --focus: #2f6fb0;
+    --bg: #f2efe8;
+    --panel: #1c1a16;
+    --panel-ink: #e4ddcc;
+    --ink: #1c1a16;
+    --ink-muted: #66604f;
+    --accent: #b0302a;
+    --accent-ink: #fff;
+    --rule: #d0c8b0;
+    --seal: #8b7335;
+    --focus: #b0302a;
 
-    --font-display: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    --font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1a1610;
-      --panel: #0f0d08;
-      --panel-ink: #ece4d2;
-      --ink: #ece4d2;
-      --ink-muted: #a89a80;
-      --accent: #cf9f4f;
-      --accent-ink: #1a1610;
-      --rule: #3a3122;
-      --seal: #cf9f4f;
-      --focus: #7db3e8;
+      --bg: #100e0a;
+      --panel: #1c1a16;
+      --panel-ink: #d5ccb5;
+      --ink: #d5ccb5;
+      --ink-muted: #7a7260;
+      --accent: #cc4440;
+      --accent-ink: #100e0a;
+      --rule: #4a4028;
+      --seal: #c4982a;
+      --focus: #cc4440;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #1a1610;
-    --panel: #0f0d08;
-    --panel-ink: #ece4d2;
-    --ink: #ece4d2;
-    --ink-muted: #a89a80;
-    --accent: #cf9f4f;
-    --accent-ink: #1a1610;
-    --rule: #3a3122;
-    --seal: #cf9f4f;
-    --focus: #7db3e8;
+    --bg: #100e0a;
+    --panel: #1c1a16;
+    --panel-ink: #d5ccb5;
+    --ink: #d5ccb5;
+    --ink-muted: #7a7260;
+    --accent: #cc4440;
+    --accent-ink: #100e0a;
+    --rule: #4a4028;
+    --seal: #c4982a;
+    --focus: #cc4440;
   }
   :root[data-theme="light"] {
-    --bg: #f3efe6;
-    --panel: #e3dccb;
-    --panel-ink: #1e1a14;
-    --ink: #1e1a14;
-    --ink-muted: #6b6152;
-    --accent: #8a5e1f;
-    --accent-ink: #fbf6ea;
-    --rule: #cdc2a8;
-    --seal: #7d5a26;
-    --focus: #2f6fb0;
+    --bg: #f2efe8;
+    --panel: #1c1a16;
+    --panel-ink: #e4ddcc;
+    --ink: #1c1a16;
+    --ink-muted: #66604f;
+    --accent: #b0302a;
+    --accent-ink: #fff;
+    --rule: #d0c8b0;
+    --seal: #8b7335;
+    --focus: #b0302a;
   }
 
   * { box-sizing: border-box; }
-  html { direction: ltr; }
   html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
   body {
     background: var(--bg);
     color: var(--ink);
     font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 15.5px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    direction: ltr;
   }
   ::selection { background: var(--accent); color: var(--accent-ink); }
 
-  a { color: var(--accent); }
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 3px;
-  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
 
   .layout {
     display: grid;
     grid-template-areas: "sidebar main";
     grid-template-columns: 260px minmax(0, 1fr);
-    direction: ltr;
     min-height: 100vh;
     width: 100%;
-    max-width: 100%;
   }
 
   .sidebar {
@@ -101,10 +94,8 @@
     border-right: 1px solid var(--rule);
     position: sticky;
     top: 0;
-    left: 0;
     height: 100vh;
     overflow-y: auto;
-    overflow-x: hidden;
     padding: 28px 16px 24px;
     display: flex;
     flex-direction: column;
@@ -114,52 +105,58 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0 6px;
+    padding: 4px 8px;
+    border: 1px solid var(--seal);
+    background: rgba(0,0,0,0.2);
   }
   .sidebar-mark svg { flex: none; }
   .sidebar-mark .name {
     font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    line-height: 1.25;
+    line-height: 1.2;
   }
   .sidebar-mark .name em {
     display: block;
     font-style: normal;
     font-family: var(--font-mono);
-    font-size: 9.5px;
-    letter-spacing: 0.14em;
+    font-size: 9px;
+    letter-spacing: 0.18em;
     color: var(--ink-muted);
-    margin-top: 3px;
+    margin-top: 2px;
   }
 
-  nav.toc { display: flex; flex-direction: column; gap: 2px; }
+  nav.toc { display: flex; flex-direction: column; gap: 1px; }
   nav.toc a {
     display: flex;
     align-items: baseline;
     gap: 8px;
-    padding: 6px 10px;
-    border-radius: 4px;
+    padding: 5px 8px;
     text-decoration: none;
     color: var(--panel-ink);
-    font-size: 13px;
-    line-height: 1.35;
-    transition: background 120ms ease, color 120ms ease;
+    font-size: 12.5px;
+    line-height: 1.3;
+    border-left: 2px solid transparent;
+    transition: none;
   }
   nav.toc a .num {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 10px;
     color: var(--ink-muted);
     min-width: 18px;
     text-align: right;
   }
-  nav.toc a:hover { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+  nav.toc a:hover {
+    border-left-color: var(--accent);
+    background: rgba(255,255,255,0.05);
+  }
   nav.toc a[aria-current="true"] {
-    background: color-mix(in srgb, var(--accent) 20%, transparent);
-    color: var(--ink);
-    font-weight: 600;
+    border-left-color: var(--accent);
+    background: rgba(255,255,255,0.08);
+    color: var(--panel-ink);
+    font-weight: 700;
   }
   nav.toc a[aria-current="true"] .num { color: var(--accent); }
 
@@ -168,23 +165,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
     padding-top: 14px;
     border-top: 1px solid var(--rule);
   }
   .sidebar-foot .note {
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: 9.5px;
     color: var(--ink-muted);
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
   }
   .theme-btn {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 10px;
     background: transparent;
     border: 1px solid var(--rule);
     color: var(--panel-ink);
-    border-radius: 4px;
     padding: 5px 8px;
     cursor: pointer;
     letter-spacing: 0.04em;
@@ -200,11 +195,9 @@
     background: var(--panel);
     color: var(--panel-ink);
     border: 1px solid var(--rule);
-    border-radius: 6px;
-    width: 38px;
-    height: 38px;
-    font-family: var(--font-mono);
-    font-size: 15px;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
     cursor: pointer;
   }
 
@@ -212,26 +205,27 @@
     grid-area: main;
     min-width: 0;
     width: 100%;
-    padding: 48px clamp(20px, 5vw, 80px) 80px;
-    max-width: 720px;
+    padding: 48px clamp(24px, 5vw, 80px) 80px;
+    max-width: 740px;
   }
 
   .title-block { margin-bottom: 40px; }
   .eyebrow {
     font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.16em;
+    font-size: 10px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--accent);
-    margin: 0 0 10px;
+    margin: 0 0 8px;
   }
   h1.doc-title {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(28px, 4vw, 38px);
-    letter-spacing: -0.01em;
-    line-height: 1.1;
-    margin: 0 0 6px;
+    font-weight: 800;
+    font-size: clamp(30px, 4.5vw, 42px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0 0 4px;
+    text-transform: uppercase;
   }
   .doc-subtitle {
     font-size: 14px;
@@ -239,81 +233,69 @@
     margin: 0;
   }
 
-  .doc-note {
-    font-size: 14.5px;
-    color: var(--ink-muted);
-    border-left: 2px solid var(--accent);
-    padding: 12px 0 12px 18px;
-    margin: 0 0 44px;
-    line-height: 1.55;
-  }
-
   section.article {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
     scroll-margin-top: 20px;
-  }
-  section.article .article-head {
-    margin-bottom: 14px;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 8px;
-  }
-  section.article .art-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.06em;
   }
   section.article h2 {
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 20px;
-    margin: 4px 0 0;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0 0 12px;
     letter-spacing: -0.01em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 6px;
   }
 
-  section.article p { margin: 0 0 12px; max-width: 66ch; font-size: 15px; }
+  section.article p { margin: 0 0 10px; max-width: 68ch; }
   section.article p:last-child { margin-bottom: 0; }
 
-  .highlights {
-    margin: 14px 0;
+  ul.highlights {
+    margin: 10px 0;
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
   }
-  .highlights li {
+  ul.highlights li {
     display: grid;
-    grid-template-columns: 24px 1fr;
-    gap: 10px;
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
     font-size: 15px;
-    max-width: 66ch;
+    max-width: 68ch;
   }
-  .highlights .bullet {
-    font-family: var(--font-mono);
-    color: var(--accent);
-    font-size: 13px;
-    padding-top: 2px;
+  ul.highlights .bullet { font-family: var(--font-mono); color: var(--accent); }
+
+  .note-block {
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-style: italic;
+    border-top: 1px solid var(--rule);
+    padding-top: 10px;
+    margin-top: 14px;
+    max-width: 60ch;
   }
 
   .closing {
-    margin-top: 56px;
-    padding-top: 28px;
-    border-top: 1px solid var(--rule);
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 2px solid var(--ink);
     text-align: center;
   }
   .closing p {
     font-style: italic;
     color: var(--ink-muted);
-    font-size: 15px;
+    font-size: 14px;
     max-width: 42ch;
-    margin: 0 auto 14px;
+    margin: 0 auto 12px;
   }
   .closing .brand {
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.16em;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--ink);
   }
@@ -326,18 +308,16 @@
       inset: 0 auto 0 0;
       width: 270px;
       min-width: 270px;
-      max-width: 270px;
       transform: translateX(-100%);
       transition: transform 200ms ease;
       z-index: 15;
-      box-shadow: 2px 0 24px rgba(0,0,0,0.25);
     }
     .sidebar.open { transform: translateX(0); }
     .scrim {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.35);
+      background: rgba(0,0,0,0.4);
       z-index: 12;
     }
     .scrim.open { display: block; }
@@ -357,7 +337,7 @@
 
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-mark">
-      <svg width="30" height="30" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 34 34" fill="none" aria-hidden="true">
         <circle cx="17" cy="17" r="15.5" stroke="var(--seal)" stroke-width="1.2"/>
         <circle cx="17" cy="17" r="10.5" stroke="var(--seal)" stroke-width="1"/>
         <circle cx="17" cy="17" r="2.4" fill="var(--seal)"/>
@@ -373,7 +353,7 @@
 
     <nav class="toc" aria-label="Разделы">
       <a href="#vstuplenie"><span class="num">—</span>Вступление</a>
-      <div class="divider"></div>
+      <div style="height:1px;background:var(--rule);margin:6px 2px"></div>
       <a href="#sut"><span class="num">1</span>Суть</a>
       <a href="#produkt"><span class="num">2</span>Продукт</a>
       <a href="#ekonomika"><span class="num">3</span>Экономика</a>
@@ -382,12 +362,14 @@
       <a href="#pravila"><span class="num">6</span>Правила</a>
       <a href="#dohod"><span class="num">7</span>Доход</a>
       <a href="#razvitie"><span class="num">8</span>Развитие</a>
-      <a href="#vyhod"><span class="num">9</span>Выход</a>
+      <a href="#nasledie"><span class="num">9</span>Наследие и дети</a>
+      <a href="#obyazatelstva"><span class="num">10</span>Обязательства</a>
+      <a href="#vyhod"><span class="num">11</span>Выход</a>
     </nav>
 
     <div class="sidebar-foot">
       <span class="note">рабочая версия</span>
-      <button class="theme-btn" id="themeBtn" type="button">тема</button>
+      <button class="theme-btn" id="themeBtn" type="button">тёмная</button>
     </div>
   </aside>
 
@@ -399,10 +381,7 @@
     </div>
 
     <section class="article" id="vstuplenie">
-      <div class="article-head">
-        <div class="art-label">Вступление</div>
-        <h2>От автора</h2>
-      </div>
+      <h2>Вступление</h2>
       <p>Я 35 лет занимаюсь бизнесом. С нуля прошёл путь до собственного производства, полиграфического комбината, объектов недвижимости. Деньги были — большие. Но когда они перестали давать смысл, а семейная жизнь разрушилась — я начал искать ответы.</p>
       <p>Я понял одну вещь: в нашей стране идёт системное разрушение мужского воспитания. Мужчины перестали опираться друг на друга. Каждый сам за себя — и каждый сам не справляется. Гонка, долги, разводы, потерянное время. 24/7 без результата.</p>
       <p>Меня воспитал отец. С 10 лет я жил с ним круглосуточно — сам готовил, стирал, работал. В восьмом классе уже была трудовая книжка. Я знаю, что значит отцовское воспитание. И я вижу, что именно это мы теряем.</p>
@@ -411,47 +390,36 @@
     </section>
 
     <section class="article" id="sut">
-      <div class="article-head">
-        <div class="art-label">Раздел 1</div>
-        <h2>Суть</h2>
-      </div>
-      <p>Кооператив для мужчин в трудной ситуации. Которые <strong>чувствуют, что имеют способности, хотят реализовать свой потенциал, вылезти из проблем, стать сильнее</strong>. Кому нужен доход, своё дело и мужское плечо рядом. Кто <strong>хочет выйти из вечной гонки, перестать ебашить 24/7 без результата</strong>.</p>
+      <h2>1. Суть</h2>
+      <p>Кооператив для мужчин в трудной ситуации. Которые чувствуют, что имеют способности, хотят реализовать свой потенциал, вылезти из проблем, стать сильнее. Кому нужен доход, своё дело и мужское плечо рядом. Кто хочет выйти из вечной гонки, перестать ебашить 24/7 без результата.</p>
+      <p>Это сообщество деловых активных мужчин, небезразличных — со своей моделью поведения, своим культурным кодом. Кооператив существует, в том числе, как поддержка мужчинам, оказавшимся в трудной ситуации из-за несправедливости со стороны женщин или судебной системы, которая ставит мужчину в неравное положение, отбирает истинную власть и силу.</p>
       <p>Не благотворительность и не инвестклуб. Принцип: вкладываешься в общее — общее даёт тебе.</p>
       <p><strong>На чём стоим:</strong></p>
       <ul class="highlights">
-        <li><span class="bullet">—</span><strong>Служение, а не предательство.</strong> Предатель своих — в круг не возвращается.</li>
-        <li><span class="bullet">—</span><strong>Мужское воспитание.</strong> Отец — основа. Не просто уважение, а почитание старших. Сейчас общество разрушает это — мы восстанавливаем.</li>
-        <li><span class="bullet">—</span><strong>Правильное отношение к женщинам.</strong> Женщина — помощница и союзница, а не конкурент. Войну полов мы заканчиваем — лишаем её почвы и повода.</li>
+        <li><span class="bullet">—</span><strong>Служение Отечеству и стране.</strong> Общее — ценнее частного. Определённая форма служения и самопожертвования.</li>
+        <li><span class="bullet">—</span><strong>Почитание отцов.</strong> Не просто уважение — беспрекословное почитание отцов. Культ отцов. С обрядами, молитвами, мероприятиями. Благодарность отцам.</li>
+        <li><span class="bullet">—</span><strong>Правильное отношение к женщинам.</strong> Прекращение войны полов. Женщины — помощницы и союзницы, а не соперницы.</li>
       </ul>
     </section>
 
     <section class="article" id="produkt">
-      <div class="article-head">
-        <div class="art-label">Раздел 2</div>
-        <h2>Продукт</h2>
-      </div>
-      <p>Есть понятный продукт — <strong>домик из контейнера</strong>. Мобильный, утеплённый, с водой и светом, автономными системами.</p>
-      <p><strong>Стройка 3 месяца</strong> — не год. Себестоимость одного контейнера <strong>1,5–2 млн рублей</strong>. Установка на месте — манипулятором за 15 минут.</p>
-      <p>Контейнер абсолютно ликвидный — перевозится куда угодно: Кремль, Сочи, море — поставил и живёшь. Можно маскировать под техслужбы — чтобы не было проблем с контролем и надзором, а внутри полноценный дом с мойкой, садом, всем хозяйством.</p>
-      <p>Контейнер с автономной системой воды — в квартире такого нет. В отличие от квартиры — своя земля, своя база, своя территория под мужской менталитет.</p>
-      <p>Мы строим, продаём и сдаём в аренду. Это массовое предпринимательство — бизнес для предпринимателей по контейнерному строительству.</p>
+      <h2>2. Продукт</h2>
+      <p>Есть понятный продукт — домик из контейнера. Мобильный, утеплённый, с водой и светом, автономными системами.</p>
+      <p>Стройка 3 месяца — не год. Себестоимость одного контейнера 1,5–2 млн рублей. Установка на месте — манипулятором за 15 минут.</p>
+      <p>Контейнер абсолютно ликвидный — перевозится куда угодно: Кремль, Сочи, море — поставил и живёшь. Можно маскировать под техслужбы, а внутри полноценный дом с мойкой, садом, всем хозяйством.</p>
+      <p>Контейнер с автономной системой воды — в квартире такого нет. Своя земля, своя база, своя территория.</p>
+      <p>Мы строим, продаём и сдаём в аренду. Массовое предпринимательство для предпринимателей по контейнерному строительству. Работяги режут, варят, монтируют своими руками. В этом есть мужская сила, успешность и гармония. Создавать и обустраивать своё жильё своими руками — по эффективной модели и вклад в дело кооператива.</p>
     </section>
 
     <section class="article" id="ekonomika">
-      <div class="article-head">
-        <div class="art-label">Раздел 3</div>
-        <h2>Экономика</h2>
-      </div>
-      <p>Себестоимость одного контейнера — <strong>1,5–2 млн рублей</strong>. Аренда — <strong>20 000–25 000 ₽/мес</strong>. Окупаемость — в горизонте нескольких лет при стабильной сдаче.</p>
+      <h2>3. Экономика</h2>
+      <p>Себестоимость одного контейнера — 1,5–2 млн рублей. Аренда — 20 000–25 000 ₽/мес. Окупаемость — в горизонте нескольких лет при стабильной сдаче.</p>
       <p>Цены на капитальное строительство взлетели — контейнер с автономкой дешевле и быстрее любого капитального дома. Контейнер абсолютно ликвиден — в отличие от квартиры, его можно перевезти и продать в любом месте.</p>
       <p>Такого соотношения цена / ликвидность на рынке сейчас нет нигде.</p>
     </section>
 
     <section class="article" id="kak-rabotaet">
-      <div class="article-head">
-        <div class="art-label">Раздел 4</div>
-        <h2>Как это работает</h2>
-      </div>
+      <h2>4. Как это работает</h2>
       <p><strong>Установка.</strong> Привезли контейнер манипулятором — через 15 минут он стоит на месте. Подключил автономные системы — живёшь.</p>
       <p><strong>Размещение.</strong> Контейнер маскируется под техслужбы, сервисные боксы, мобильные офисы — никаких проблем с надзором. Внутри — полноценный дом с мойкой, садом, всем хозяйством.</p>
       <p><strong>Корпоративный сервис.</strong> Можно организовать службу по уходу и обслуживанию таких домов. Это дополнительный регулярный доход.</p>
@@ -459,60 +427,51 @@
     </section>
 
     <section class="article" id="kto">
-      <div class="article-head">
-        <div class="art-label">Раздел 5</div>
-        <h2>Кто может войти</h2>
-      </div>
-      <p>Мужчины, у которых есть <strong>способности и желание развиваться</strong>. Строители и предприниматели. Те, кто хочет служить стране через реальное дело. Лидеры мнений — мужики на одной волне.</p>
+      <h2>5. Кто может войти</h2>
+      <p>Мужчины, у которых есть способности и желание развиваться. Строители и предприниматели. Те, кто хочет служить стране через реальное дело. Лидеры мнений — мужики на одной волне.</p>
       <p><strong>Кто не зайдёт:</strong> индивидуалисты, люди с западной капиталистической прошивкой — «каждый сам за себя». Те, кто предавал своих единомышленников. Эгоисты, для которых общее — пустой звук.</p>
-      <p>Это сообщество, где каждый получает долю от общего результата, <strong>потому что вложил труд</strong>. С точки зрения окупаемости и входа в бизнес — лучший вариант из того, что сейчас есть.</p>
+      <p>Каждый получает долю от общего результата, потому что вложил труд. С точки зрения окупаемости и входа в бизнес — лучший вариант из того, что сейчас есть.</p>
     </section>
 
     <section class="article" id="pravila">
-      <div class="article-head">
-        <div class="art-label">Раздел 6</div>
-        <h2>Правила</h2>
-      </div>
-      <p>Организация с <strong>понятными правилами</strong>:</p>
-      <ul class="highlights">
-        <li><span class="bullet">—</span>Чёткий вход и выход</li>
-        <li><span class="bullet">—</span>Как себя вести внутри</li>
-        <li><span class="bullet">—</span>Как решаются конфликты</li>
-      </ul>
-      <p>Не изобретаем велосипед. Берём существующую практику подобных уставов (казачий круг, артельные принципы, современные предпринимательские клубы), адаптируем под наше дело. Пишем для людей, <strong>понятным языком</strong>.</p>
+      <h2>6. Правила</h2>
+      <p>Организация с понятными правилами: чёткий вход и выход, как себя вести внутри, как решаются конфликты.</p>
+      <p>Споры решает старший. Уполномоченные — старшины, деды. Решение принимается советом.</p>
+      <p><strong>Личное — табу.</strong> Личные интимные истории, трагедии каждого остаются внутри круга и никогда не выносятся наружу.</p>
+      <p>Не изобретаем велосипед. Берём существующую практику подобных уставов (казачий круг, артельные принципы, современные предпринимательские клубы), адаптируем под наше дело. Пишем для людей, понятным языком.</p>
       <p><strong>Золотое правило:</strong> что должен знать человек, который хочет войти? Вот столько и пишем. Ни строки больше.</p>
+      <p><strong>Перспектива:</strong> внутри сообщества — карьерный рост. От рядового участника до старшины, от старшины до совета. Не на словах, а через дело, испытания, доказанную состоятельность.</p>
     </section>
 
     <section class="article" id="dohod">
-      <div class="article-head">
-        <div class="art-label">Раздел 7</div>
-        <h2>Доход</h2>
-      </div>
-      <p><strong>Пассивный доход от аренды</strong> контейнеров — каждый участник получает долю от общего котла.</p>
-      <p>Но чтобы этот доход появился, нужно <strong>вложить труд</strong>. Кооператив — не покупка доли, а общее дело.</p>
-      <p>Чем больше вложил — тем больше доля.</p>
+      <h2>7. Доход</h2>
+      <p>Пассивный доход от аренды контейнеров — каждый участник получает долю от общего котла.</p>
+      <p>Но чтобы этот доход появился, нужно вложить труд. Кооператив — не покупка доли, а общее дело. Чем больше вложил — тем больше доля.</p>
     </section>
 
     <section class="article" id="razvitie">
-      <div class="article-head">
-        <div class="art-label">Раздел 8</div>
-        <h2>Развитие</h2>
-      </div>
-      <p>Часть дохода идёт не в карман, а <strong>на развитие</strong>: закупка новых контейнеров, расширение производства, увеличение арендного портфеля.</p>
-      <p>Пассивный доход — это <strong>инструмент для роста</strong>, а не «сидеть и получать». Схема:</p>
-      <p>Ты вложил труд и деньги → получил доход → часть реинвестировал → построили новый контейнер → доход вырос.</p>
-      <p>Каждый участник заинтересован в росте дела, а не просто в получении выплат.</p>
+      <h2>8. Развитие</h2>
+      <p>Часть дохода идёт на развитие: закупка новых контейнеров, расширение производства, увеличение арендного портфеля.</p>
+      <p>Все деньги инвестируются в развитие вождей. Перспективные мужики поддерживаются, становятся вождями. <strong>Главный капитал — это люди.</strong> Один котёл — доход с недвижимости и с контейнеров. Контейнер в аренде приносит больше, чем проданный — как квартира за 20 лет приносит больше своей рыночной стоимости.</p>
+      <p>Пассивный доход — это инструмент для роста, а не «сидеть и получать». Схема: вложил труд и деньги → получил доход → часть реинвестировал → построили новый контейнер → доход вырос.</p>
+    </section>
+
+    <section class="article" id="nasledie">
+      <h2>9. Наследие и дети</h2>
+      <p>Кооператив и его участники берут на себя заботу о наследниках. Участникам кооператива планируется давать поддержку детям после того, как те останутся без попечения. Помощь в трудной ситуации, присмотр, поддержка перспективных — чтобы наследие не было проедено, а пошло в дело.</p>
+    </section>
+
+    <section class="article" id="obyazatelstva">
+      <h2>10. Обязательства участника</h2>
+      <p>Если есть деньги — любая польза приветствуется. Конкретные правила входа обсуждаются и прописываются — формулируются по мере формирования сообщества.</p>
+      <p>Система воспитания и дисциплины — по методу Макаренко: воспитательная и трудовая. Система свободных отрядов с чёткой ответственностью.</p>
+      <p>Наша задача — быстро поставить человека на ноги. Нам инвалиды не нужны — активные бойцы. Дальше он встаёт на ноги — и мы на эти ноги опираемся.</p>
     </section>
 
     <section class="article" id="vyhod">
-      <div class="article-head">
-        <div class="art-label">Раздел 9</div>
-        <h2>Выход</h2>
-      </div>
-      <ul class="highlights">
-        <li><span class="bullet">—</span><strong>При выходе</strong> — забираешь свой вклад по понятной формуле</li>
-        <li><span class="bullet">—</span><strong>Исключают</strong> — за нарушение правил</li>
-      </ul>
+      <h2>11. Выход</h2>
+      <p><strong>При выходе</strong> — участник может забрать свою делимую часть вклада. Всё проговаривается, обсуждается, прописывается.</p>
+      <p><strong>Исключают</strong> — за нарушение правил, воровство, интриги, подрыв репутации. Решение выносится общим советом.</p>
       <p>Всё прозрачно. Никаких сюрпризов.</p>
     </section>
 
